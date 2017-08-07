@@ -50,4 +50,13 @@ DeckClass.prototype = {
       }
     }
   },
+
+  deal: function() {
+    var randomNumber = Math.floor(Math.random() * this.cardsLeft.length);
+    var card = this.cardsLeft[randomNumber];
+    this.cardsLeft.splice(randomNumber,1);
+    return card;
+  }
 };
+
+var deck = new DeckClass();
