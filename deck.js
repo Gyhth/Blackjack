@@ -1,6 +1,6 @@
 var DeckClass = function() {
   this.cardsLeft = new Array();
-	this.generate();
+  this.generate();
 };
 
 var CardClass = function(value, suit, name) {
@@ -49,14 +49,23 @@ DeckClass.prototype = {
         this.cardsLeft.push(card);
       }
     }
+    this.shuffle();
   },
 
   deal: function() {
-    var randomNumber = Math.floor(Math.random() * this.cardsLeft.length);
-    var card = this.cardsLeft[randomNumber];
-    this.cardsLeft.splice(randomNumber,1);
+    var card = this.cardsLeft[0];
+    this.cardsLeft.splice(0, 1);
     return card;
-  }
+  },
+
+  shuffle: function() {
+    for (var i = this.cardsLeft.length - 1; i > 0; i--) {
+      var swapWithIndex = Math.floor(Math.random() * (i + 1));
+      var temp = this.cardsLeft[i];
+      this.cardsLeft[i] = this.cardsLeft[swapWithIndex];
+      this.cardsLeft[swapWithIndex] = temp;
+    }
+  },
 };
 
 var deck = new DeckClass();
